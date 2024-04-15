@@ -1,9 +1,6 @@
 using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
-using UnityEditor.PackageManager;
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour

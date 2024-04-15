@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using Unity.VisualScripting;
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -149,9 +148,9 @@ public class FirebaseManager : MonoBehaviour
 
     public List<string> RankData;
 
-    public void UpdateRank(string nickname, int score)
+    public void UpdateRank(string userId, int score)
     {
-        var userRef = db.GetReference("users").Child("Ranking").Child(nickname);
+        var userRef = db.GetReference("users").Child("Ranking").Child(userId);
         userRef.SetValueAsync(score);
     }
     public void GetRanking(Action<List<string>> callback)
