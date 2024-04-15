@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager Instance;
     public GameObject MonsterPrefab;
     float spawnInterval;
+    float spawnTime = 7;
     public List<Transform> spawnTransform;
 
     public Coroutine spawnRoutine = null;
@@ -27,12 +28,11 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > spawnInterval + 2)
+        if (Time.time > spawnInterval + spawnTime)
         {
             int i = UnityEngine.Random.Range(0, spawnTransform.Count);
             SpawnMonster(MonsterPrefab, spawnTransform[i].position, spawnTransform[i]);
         }
-
     }
     public void SpawnMonster(GameObject monster, Vector3 dir, Transform parent)
     {
@@ -44,9 +44,8 @@ public class SpawnManager : MonoBehaviour
         LeanPool.Despawn(obj);
     }
     
-    public void BulletSpawn(Projectile bullet,Vector3 dir, Quaternion rot,Transform parent)
+    public void BulletSpawn(Projectile bullet,Vector3 dir, Quaternion rot)
     {
-        LeanPool.Spawn(bullet,dir,rot,parent);
-        bullet.rb.AddForce(dir * bullet.speed,ForceMode.Impulse);
+        LeanPool.Spawn(bullet,dir,rot);
     }
 }

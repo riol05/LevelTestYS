@@ -15,7 +15,6 @@ public class LoadingUI : MonoBehaviour
     }
     public void StartLoadingUI()
     {
-        ActiveLoadingImage(true);
         LoadingProgress(0f);
     }
     public void LoadingProgress(float progress)

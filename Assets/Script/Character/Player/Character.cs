@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     public int level;
     
     public int fullHP;
-    [HideInInspector]
+    //[HideInInspector]
     public int curHP;
     
     public int damage;
@@ -20,41 +20,32 @@ public class Character : MonoBehaviour
 
     public int gameProgress;
 
-    public Rigidbody rb;
     public NavMeshAgent agent;
 
-    public Character(int level, int fullhp, int damage, string name,int speed)
+    public Character( int fullhp, int damage, string name, int speed, int CurHP)
     {
-        this.level = level;
         this.fullHP = fullhp;
         this.damage = damage;
         this.name = name;
         this.speed = speed;
-    }
-
-    public Character(int level, int fullhp, int damage, string name)
-    {
-        this.level = level;
-        fullHP = fullhp;
-        this.damage = damage;
-        this.name = name;
+        this.curHP = CurHP;
     }
 
     public virtual void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        curHP = fullHP;
     }
     public virtual void GetDamage(int Damage) 
     {
         if(curHP > 0)
         {
             curHP-= Damage;
-            if (curHP < 0)
-                Die();
+            if (curHP <= 0)
+            { 
+               Die();
+            }
         }
-            Die();
+        
     }
     public virtual void Die()
     {

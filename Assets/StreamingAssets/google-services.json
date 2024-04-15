@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "322257755037",
+    "firebase_url": "https://leveltestfirebase-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "leveltestfirebase",
+    "storage_bucket": "leveltestfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322257755037:android:a25024d841af1a78aaad74",
+        "android_client_info": {
+          "package_name": "com.YSlevelTest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw8iMH2NnCDvDBaE35eRdrhbqztnwnegE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
