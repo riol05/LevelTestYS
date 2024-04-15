@@ -180,6 +180,7 @@ public class FirebaseManager : MonoBehaviour
 
                 index++;
             }
+           
             callback?.Invoke(rankData);
         });
     }

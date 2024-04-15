@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public RankPannel rankpan;
     public int score;
     public Player player;
 
@@ -25,20 +24,21 @@ public class GameManager : MonoBehaviour
 
     public void showRank()
     {
-
+        rankPannel.gameObject.SetActive(true);
     }
     public void GetScore()
     {
         score += 1;
     }
+    public RankPannel rankPannel;
+
     public void GameOver()
     {
         if (!isDone)
         {
             FirebaseManager.instance.UpdateRank(FirebaseManager.instance.user.DisplayName, score);
-
-            SceneLoader.Instance.SceneChange(SceneLoader.Instance.scene[2]);
             isDone = true;
+            showRank();
         }
     }
 }

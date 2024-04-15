@@ -8,15 +8,20 @@ public class RankPannel : MonoBehaviour
     public Button LoginPannelButton;
 
     public RectTransform rankPan;
-    public RankUser rankPrefab;
+    public GameObject rankPrefab;
 
+
+    public List<string> rankList;
     private void Start()
     {
-        //LoginPannelButton.onClick.AddListener(LoginPannelButtonClick);
-        RefreshRanking();
+        LoginPannelButton.onClick.AddListener(LoginPannelButtonClick);
     }
 
-    private void RefreshRanking()
+    private void OnEnable()
+    {
+        RefreshRanking();
+    }
+    public void RefreshRanking()
     {
         FirebaseManager.instance.GetRanking((rankData) =>
         {
@@ -27,12 +32,17 @@ public class RankPannel : MonoBehaviour
 
     private void UpdateRankingUI(List<string> rankData)
     {
+        print($"{rankData.Count}");
+        print($"{rankData[0]}");
+        print($"{rankData[1]}");
+        print($"{rankData[2]}");
+
         // 기존 데이터를 지우고 새로운 데이터로 채움
-        ClearRankingUI();
+        //ClearRankingUI();
         foreach (string playerText in rankData)
         {
-            RankUser man = Instantiate(rankPrefab, rankPan);
-            man.rankText.text = playerText;
+            var man = Instantiate(rankPrefab, rankPan);
+            man.GetComponent<RankUser>().rankText.text = playerText;
         }
     }
 
