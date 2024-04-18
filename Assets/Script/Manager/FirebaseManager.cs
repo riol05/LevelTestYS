@@ -154,14 +154,14 @@ public class FirebaseManager : MonoBehaviour
         userRef.SetValueAsync(score);
     }
     //public async void GetRanking(Action<List<string>> callback) // 주석대로 바꾸는게 조금 더 세련된 방법이었다..
-    public void GetRanking(Action<List<string>> callback)
+    public async void GetRanking(Action<List<string>> callback)
     {
         Query rankingQuery = db.GetReference("users").Child("Ranking").OrderByValue().LimitToLast(10);
 
         //var datasnap = await rankingQuery.GetValueAsync();
 
-        rankingQuery.GetValueAsync().ContinueWithOnMainThread(task =>
-        {
+        await rankingQuery.GetValueAsync().ContinueWithOnMainThread(task =>
+            {
             if (task.IsFaulted)
             {
                 Debug.LogError("Error getting ranking: " + task.Exception);
