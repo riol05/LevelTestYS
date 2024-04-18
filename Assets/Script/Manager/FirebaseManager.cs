@@ -153,11 +153,14 @@ public class FirebaseManager : MonoBehaviour
         var userRef = db.GetReference("users").Child("Ranking").Child(userId);
         userRef.SetValueAsync(score);
     }
+    //public async void GetRanking(Action<List<string>> callback) // 주석대로 바꾸는게 조금 더 세련된 방법이었다..
     public void GetRanking(Action<List<string>> callback)
     {
         Query rankingQuery = db.GetReference("users").Child("Ranking").OrderByValue().LimitToLast(10);
 
-        rankingQuery.GetValueAsync().ContinueWith(task =>
+        //var datasnap = await rankingQuery.GetValueAsync();
+
+        rankingQuery.GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted)
             {
@@ -180,6 +183,8 @@ public class FirebaseManager : MonoBehaviour
 
                 index++;
             }
+
+            Debug.Log(rankData.Count);
            
             callback?.Invoke(rankData);
         });
