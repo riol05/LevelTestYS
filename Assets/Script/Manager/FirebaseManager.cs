@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 
 public class FirebaseManager : MonoBehaviour
@@ -156,7 +157,7 @@ public class FirebaseManager : MonoBehaviour
     //public async void GetRanking(Action<List<string>> callback) // 주석대로 바꾸는게 조금 더 세련된 방법이었다..
     public async void GetRanking(Action<List<string>> callback)
     {
-        Query rankingQuery = db.GetReference("users").Child("Ranking").OrderByValue().LimitToLast(10);
+        Query rankingQuery = db.GetReference("users").Child("Ranking").OrderByValue().LimitToLast(7);
 
         //var datasnap = await rankingQuery.GetValueAsync();
 
@@ -171,22 +172,31 @@ public class FirebaseManager : MonoBehaviour
             DataSnapshot snapshot = task.Result;
             List<string> rankData = new List<string>();
             int index = 0;
-
+            Debug.Log("ChidrenCount"+snapshot.ChildrenCount);
+            
             foreach (DataSnapshot playerSnapshot in snapshot.Children)
             {
                 string playerName = playerSnapshot.Key;
                 string playerScore = playerSnapshot.Value.ToString();
 
                 string playerText;
-                playerText = $"{index + 1}위.   {playerName}: {playerScore}";
+                playerText = $"   {playerName}: {playerScore}";
                 rankData.Add(playerText);
-
                 index++;
             }
-
-            Debug.Log(rankData.Count);
+            rankData.Reverse();
+            List<string> rank2 = new List<string>();
+            index = 0;
+                foreach(string rank in rankData)
+                {
+                    ++index;
+                    string rankText;
+                     rankText = $"{index}위."+rank;
+                    rank2.Add(rankText);
+                }
+            Debug.Log(rank2.Count);
            
-            callback?.Invoke(rankData);
+            callback?.Invoke(rank2);
         });
     }
     public void Logout()
