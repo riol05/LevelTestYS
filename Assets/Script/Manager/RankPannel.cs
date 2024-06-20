@@ -11,6 +11,7 @@ public class RankPannel : MonoBehaviour
     public RectTransform rankPan;
     public GameObject rankPrefab;
     
+    public List<string> rankList;
     private void Start() => LoginPannelButton.onClick.AddListener(LoginPannelButtonClick);
 
     private void OnEnable() => RefreshRanking();

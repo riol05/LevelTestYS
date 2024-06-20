@@ -171,7 +171,6 @@ public class FirebaseManager : MonoBehaviour
 
             DataSnapshot snapshot = task.Result;
             List<string> rankData = new List<string>();
-            int index = 0;
             Debug.Log("ChidrenCount"+snapshot.ChildrenCount);
             
             foreach (DataSnapshot playerSnapshot in snapshot.Children)
@@ -182,12 +181,11 @@ public class FirebaseManager : MonoBehaviour
                 string playerText;
                 playerText = $"   {playerName}: {playerScore}";
                 rankData.Add(playerText);
-                index++;
             }
             rankData.Reverse();
             List<string> rank2 = new List<string>();
-            index = 0;
-                foreach(string rank in rankData)
+            int index = 0;
+                foreach (string rank in rankData)
                 {
                     ++index;
                     string rankText;
